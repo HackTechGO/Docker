@@ -1,9 +1,18 @@
 # Basic Docker Commands
 
 ### CONTAINERS
-- The docker run command first creates a writeable container layer over the specified image, and then starts
+- The "docker run" command looks for an image locally first, if not found, it pulls from docker hub
 ```
-docker run vs docker start
+docker run <IMAGE> (e.g. "postgres:9.6")# = docker pull <IMAGE> & docker start  
+
+# in detached mode
+docker run -d redis
+
+# in a special port
+docker run -p6000:6379 redis
+
+# giving a name, e.g. "redis-older" to redis:4.0
+docker run -d -p6001:6379 --name redis-older redis:4.0
 ```
 
 - List all Docker containers using the command:
@@ -12,15 +21,19 @@ docker ps  # running containers
 docker ps -a  / docker container ls -a   # all containers
 docker ps -aq / docker container ls -aq # just ids
 ```
+- To start a specific container
+```
+docker start <CONTAINER_ID>
+```
 
 - To stop a specific container
 ```
-docker stop [container_id]
+docker stop <CONTAINER_ID>
 ```
 
 - To stop all containers, enter:
 ```
-docker stop $(docker ps –aq)
+docker stop $(docker ps -a -q)
 ```
 
 - To remove all stopped containers:
@@ -90,4 +103,14 @@ docker volume ls -f dangling=true # List dangling volumes
 
 docker volume rm volume_name volume_name
 docker volume rm $(docker volume ls -f dangling=true -q) # Remove dangling volumes
+```
+
+### DEBUGGING
+- Logs
+```
+docker logs <CONTAINER_ID or CONTAINER_NAME>
+```
+- Exec / get the terminal of the running container
+```
+docker exec -it <CONTAINER_ID or CONTAINER_NAME>
 ```
