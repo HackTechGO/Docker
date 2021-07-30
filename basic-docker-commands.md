@@ -88,7 +88,6 @@ docker run -v /home/mount/data:/var/lib/mysql/data
 ```
 <img src="https://github.com/HackTechGO/Docker/blob/master/assets/hosted-volume.png">
 
-
 ```
 # 2) anonymous volumes
 docker run -v /var/lib/mysql/data
@@ -110,6 +109,12 @@ docker volume ls -f dangling=true # List dangling volumes
 docker volume rm volume_name volume_name
 docker volume rm $(docker volume ls -f dangling=true -q) # Remove dangling volumes
 ```
+- Persistence of data for different databases
+```
+mongodb:/data/db
+mysql: var/lib/mysql
+postgres:var/lib/postgresql/dat
+```
 
 ### DEBUGGING
 - Logs
@@ -130,7 +135,10 @@ docker exec -it <CONTAINER_ID or CONTAINER_NAME> /bin/sh
 ```
 
 ### NETWORK
+<img src="https://github.com/HackTechGO/Docker/blob/master/assets/software-development.png">
+<img src="https://github.com/HackTechGO/Docker/blob/master/assets/host.png">
 <img src="https://github.com/HackTechGO/Docker/blob/master/assets/docker-network.png">
+
 - Listing networks
 ```
 docker network ls
@@ -158,6 +166,9 @@ docker run -d \
     -e ME_CONFIG_MONGODB_SERVER="mongodb" \
     mongo-express
 ```
+### DOCKERFILE
+- Example structure
+<img src="https://github.com/HackTechGO/Docker/blob/master/assets/dockerfile.png">
 
 ### DOCKER COMPOSE
 - Up
@@ -203,5 +214,4 @@ volumes:
     driver: local
 ```
 ### FLOW
-<img src="https://github.com/HackTechGO/Docker/blob/master/assets/software-development.png">
 <img src="https://github.com/HackTechGO/Docker/blob/master/assets/production-flow.png">
