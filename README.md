@@ -13,8 +13,7 @@ Docker is a set of platform as a service products that use OS-level virtualizati
 <ul>
   <li><a href="https://www.shellhacks.com/tag/docker/">ShellHacks</a></li>
   <li><a href="https://www.evernote.com/shard/s386/sh/48d393ea-c874-4da2-b4e8-413f4b5f24c3/a46afb6e6f1bd4296ea4017c4328e5f3">Docker For Windows</a></li>
+  <li><a href="https://github.com/gvilarino/docker-workshop">Workshop</a></li>
   <li><a href=""></a></li>
   <li><a href=""></a></li>
-  <li><a href=""></a></li>
-
 </ul
