@@ -82,24 +82,24 @@ docker build -t <MY-APP:1.0> <path to docker file>
 
 ### VOLUMES
 - 3 Volume types
-<img src="https://github.com/HackTechGO/Docker/blob/master/assets/hosted-volume.png">
 ```
 # 1) host volumes
 docker run -v /home/mount/data:/var/lib/mysql/data
 ```
+<img src="https://github.com/HackTechGO/Docker/blob/master/assets/hosted-volume.png">
 
-<img src="https://github.com/HackTechGO/Docker/blob/master/assets/anonymous-volume.png">
 
 ```
 # 2) anonymous volumes
 docker run -v /var/lib/mysql/data
 ```
+<img src="https://github.com/HackTechGO/Docker/blob/master/assets/anonymous-volume.png">
 
-<img src="https://github.com/HackTechGO/Docker/blob/master/assets/named-volume.png">
 ```
 # 3) named volumes - Production
 docker run -v name:/var/lib/mysql/data
 ```
+<img src="https://github.com/HackTechGO/Docker/blob/master/assets/named-volume.png">
 
 - Volumes are created individually and attached to the container for storing data. Removing the container will remove the volume. 
 And volumes are not in use and are called dangling volume.
