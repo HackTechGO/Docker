@@ -130,6 +130,7 @@ docker exec -it <CONTAINER_ID or CONTAINER_NAME> /bin/sh
 ```
 
 ### NETWORK
+<img src="https://github.com/HackTechGO/Docker/blob/master/assets/docker-network.png">
 - Listing networks
 ```
 docker network ls
@@ -201,3 +202,6 @@ volumes:
   mongo-data:
     driver: local
 ```
+### FLOW
+<img src="https://github.com/HackTechGO/Docker/blob/master/assets/software-development.png">
+<img src="https://github.com/HackTechGO/Docker/blob/master/assets/production-flow.png">
