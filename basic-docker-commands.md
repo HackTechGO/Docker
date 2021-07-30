@@ -109,8 +109,88 @@ docker volume rm $(docker volume ls -f dangling=true -q) # Remove dangling volum
 - Logs
 ```
 docker logs <CONTAINER_ID or CONTAINER_NAME>
+
+# only tail
+docker logs <CONTAINER_ID or CONTAINER_NAME> | tail
+
+# streaming the logs, so you do not do "docker logs" all the time
+docker logs <CONTAINER_ID or CONTAINER_NAME> -f
 ```
 - Exec / get the terminal of the running container
 ```
 docker exec -it <CONTAINER_ID or CONTAINER_NAME>
+```
+
+### NETWORK
+- Listing networks
+```
+docker network ls
+```
+
+- Creating network
+```
+docker network create <NETWORK_NAME>
+
+# runing an image in a specific network, e.g. mongo and mongo-express
+# mongodb
+docker run -d \
+  -p 27017:27017 \
+  --network mongo-network \
+  --name mongodb \
+  -e MONGO_INITDB_ROOT_USERNAME=admin \
+  -e MONGO_INITDB_ROOT_PASSWORD=password \
+  mongo
+ # mongo-express
+ docker run -it --rm \
+    --network mongo-network \
+    --name mongo-express \
+    -p 8081:8081 \
+    -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin \
+    -e ME_CONFIG_MONGODB_ADMINPASSWORD=password \
+    -e ME_CONFIG_MONGODB_SERVER="mongodb" \
+    mongo-express
+```
+
+### DOCKER COMPOSE
+- Up
+```
+docker-compose -f FILE.yaml up
+```
+- Down
+```
+docker-compose -f FILE.yaml down
+```
+- Yaml example, mongodb and mongo-express
+```
+version: '3'
+services:
+  # my-app:
+  # image: ${docker-registry}/my-app:1.0
+  # ports:
+  # - 3000:3000
+  mongodb:
+    image: mongo
+    container_name: "mongo"
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes:
+      - mongo-data:/data/db
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_OPTIONS_EDITORTHEME=ambiance
+    depends_on:
+       - mongodb
+volumes:
+  mongo-data:
+    driver: local
 ```
