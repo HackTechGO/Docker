@@ -14,7 +14,6 @@ docker run -p6000:6379 redis
 # giving a name, e.g. "redis-older" to redis:4.0
 docker run -d -p6001:6379 --name redis-older redis:4.0
 ```
-
 - List all Docker containers using the command:
 ```
 docker ps  # running containers
@@ -25,35 +24,29 @@ docker ps -aq / docker container ls -aq # just ids
 ```
 docker start <CONTAINER_ID>
 ```
-
 - To stop a specific container
 ```
 docker stop <CONTAINER_ID>
 ```
-
 - To stop all containers, enter:
 ```
 docker stop $(docker ps -a -q)
 ```
-
 - To remove all stopped containers:
 ```
 docker rm $(docker ps –aq)
 ```
-
 - Remove all exited containers
 ```
 docker ps -a -f status=exited
 docker rm $(docker ps -a -f status=exited -q)
 ```
-
 - To wipe Docker clean and start from scratch, enter the command:
 ```
 docker container stop $(docker container ls –aq) && docker system prune –af ––volumes
 ```
 
-
-#### IMAGES
+### IMAGES
 -  listing all the images on your system:
 ```
 docker images 
@@ -62,41 +55,52 @@ docker images -a # intermediate images
 docker image ls  
 docker rmi image_id
 ```
-
 - Remove images
 ```
 docker rmi image_id1 image_id2
 ```
-
 -  Remove dangling images
 ```
 docker rmi $(docker images -f "dangling=true" -q)
 ```
-
 - There is also a prune command available in docker to remove dangling images ( images, which are not used by any containers )
 ```
 docker image prune
 ```
-
 - This removes all (–a) images created over the last 24 hours. 
 ```
 docker image prune –a ––filter “until=24h”
 ```
-
 - Remove All Unused Docker Objects. The prune command automatically removes all resources that aren’t associated with a container.
 ```
 docker system prune
 ```
-
 - Build an image from a specified docker file
 ```
-docker build <path to docker file>
+docker build -t <MY-APP:1.0> <path to docker file>
 ```
 
-
 ### VOLUMES
-- Volumes are created individually and attached to the container for storing data. Removing the container will now remove the volume. 
-And these volumes are not in use and are called dangling volume. You can list the volumes using list command after confirming, you can remove it.
+- 3 Volume types
+
+<img src="https://github.com/HackTechGO/Docker/blob/master/assets/hosted-volume.png">
+ ```
+# 1) host volumes
+docker run -v /home/mount/data:/var/lib/mysql/data
+```
+<img src="https://github.com/HackTechGO/Docker/blob/master/assets/anonymous-volume.png">
+ ```
+# 2) anonymous volumes
+docker run -v /var/lib/mysql/data
+```
+<img src="https://github.com/HackTechGO/Docker/blob/master/assets/named-volume.png">
+ ```
+# 3) named volumes - Production
+docker run -v name:/var/lib/mysql/data
+```
+
+- Volumes are created individually and attached to the container for storing data. Removing the container will remove the volume. 
+And volumes are not in use and are called dangling volume.
 ```
 docker volume ls
 docker volume ls -f dangling=true # List dangling volumes
@@ -118,7 +122,9 @@ docker logs <CONTAINER_ID or CONTAINER_NAME> -f
 ```
 - Exec / get the terminal of the running container
 ```
-docker exec -it <CONTAINER_ID or CONTAINER_NAME>
+docker exec -it <CONTAINER_ID or CONTAINER_NAME> /bin/bash
+# or if bash not installed
+docker exec -it <CONTAINER_ID or CONTAINER_NAME> /bin/sh
 ```
 
 ### NETWORK
@@ -126,7 +132,6 @@ docker exec -it <CONTAINER_ID or CONTAINER_NAME>
 ```
 docker network ls
 ```
-
 - Creating network
 ```
 docker network create <NETWORK_NAME>
