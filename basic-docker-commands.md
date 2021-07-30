@@ -89,6 +89,7 @@ docker run -v /home/mount/data:/var/lib/mysql/data
 ```
 
 <img src="https://github.com/HackTechGO/Docker/blob/master/assets/anonymous-volume.png">
+
 ```
 # 2) anonymous volumes
 docker run -v /var/lib/mysql/data
