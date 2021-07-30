@@ -83,20 +83,20 @@ docker build -t <MY-APP:1.0> <path to docker file>
 ### VOLUMES
 - 3 Volume types
 <img src="https://github.com/HackTechGO/Docker/blob/master/assets/hosted-volume.png">
- ```
+```
 # 1) host volumes
 docker run -v /home/mount/data:/var/lib/mysql/data
 ```
 
 <img src="https://github.com/HackTechGO/Docker/blob/master/assets/anonymous-volume.png">
- ```
+```
 # 2) anonymous volumes
 docker run -v /var/lib/mysql/data
 ```
 
 <img src="https://github.com/HackTechGO/Docker/blob/master/assets/named-volume.png">
- ```
- # 3) named volumes - Production
+```
+# 3) named volumes - Production
 docker run -v name:/var/lib/mysql/data
 ```
 
