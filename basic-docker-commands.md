@@ -1,5 +1,8 @@
 # Basic Docker Commands
 
+resource:
+- https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes
+
 ### CONTAINERS
 - The "docker run" command looks for an image locally first, if not found, it pulls from docker hub
 ```
@@ -58,6 +61,13 @@ docker rmi image_id
 - Remove images
 ```
 docker rmi image_id1 image_id2
+```
+- Remove all images
+```
+# All the Docker images on a system can be listed by adding -a to the docker images command. 
+# Once you’re sure you want to delete them all, you can add the -q flag to pass the image ID to docker rmi
+docker rmi $(docker images -a -q)
+
 ```
 -  Remove dangling images
 ```
