@@ -225,3 +225,36 @@ volumes:
 ```
 ### FLOW
 <img src="https://github.com/HackTechGO/Docker/blob/master/assets/production-flow.png">
+
+### Passing aws variables to docker
+<img src="https://github.com/HackTechGO/Docker/blob/master/assets/glue-docker-container-28.jpg">
+
+- (1) To find more info about the syntax of setting up the tunnel, see <a href="https://aws.amazon.com/blogs/big-data/developing-aws-glue-etl-jobs-locally-using-a-container/#ssh_tunnel_to_container_from_client
+">this</a>.
+
+- (2) To set credentials using the docker cp command to copy credentials from the Windows host to the container, enter the following code (this example code uses the container name glue_jupyter): 
+```
+docker cp %UserProfile%\.aws\.  glue_jupyter:/root/.aws
+```
+- (3) To mount the host’s .aws directory on the container with rw option, see <a href="https://aws.amazon.com/blogs/big-data/developing-aws-glue-etl-jobs-locally-using-a-container/#mounting_with_rw_option">this</a>. 
+- (4) To mount the host’s .aws directory on the container with ro option, see <a href="https://aws.amazon.com/blogs/big-data/developing-aws-glue-etl-jobs-locally-using-a-container/#mounting_with_ro_option">this</a>. 
+- (5) To set the credentials in a file, enter the following code: 
+```
+docker run -itd -p 8888:8888 -p 4040:4040 --env-file /datalab_pocs/glue_local/env_variables.txt --name glue_jupyter amazon/aws-glue-libs:glue_libs_1.0.0_image_01 /home/jupyter/jupyter_start.sh
+```
+/datalab_pocs/glue_local/env_variables.txt is the absolute path of the file holding the environment variables. The file should have the following variables:
+AWS_ACCESS_KEY_ID=<Access_id>
+AWS_SECRET_ACCESS_KEY=<Access_key>
+AWS_REGION=<Region>
+
+- (6) To set the credentials in the docker run command, enter the following code:
+```
+docker run -itd -p 8888:8888 -p 4040:4040 -e AWS_ACCESS_KEY_ID=<ID> -e AWS_SECRET_ACCESS_KEY=<Key> -e AWS_REGION=<Region>  --name glue_jupyter amazon/aws-glue-libs:glue_libs_1.0.0_image_01 /home/jupyter/jupyter_start.sh 
+```
+- (7) To set credentials using aws configure on the container, enter the following code:
+```
+docker run -itd -p 8888:8888 -p 4040:4040 --name glue_jupyter amazon/aws-glue-libs:glue_libs_1.0.0_image_01 /home/jupyter/jupyter_start.sh
+docker exec -it glue_jupyter bash
+aws configure 
+```
+
