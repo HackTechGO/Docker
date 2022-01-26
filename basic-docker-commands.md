@@ -127,6 +127,11 @@ postgres:var/lib/postgresql/dat
 ```
 
 ### DEBUGGING
+- Inspection
+```
+docker inspect <CONTAINER_ID or CONTAINER_NAME> 
+```
+
 - Logs
 ```
 docker logs <CONTAINER_ID or CONTAINER_NAME>
@@ -227,6 +232,7 @@ volumes:
 <img src="https://github.com/HackTechGO/Docker/blob/master/assets/production-flow.png">
 
 ### Passing aws variables to docker
+(<a href="https://aws.amazon.com/blogs/big-data/developing-aws-glue-etl-jobs-locally-using-a-container/">source</a>)
 <img src="https://github.com/HackTechGO/Docker/blob/master/assets/glue-docker-container-28.jpg">
 
 - (1) To find more info about the syntax of setting up the tunnel, see <a href="https://aws.amazon.com/blogs/big-data/developing-aws-glue-etl-jobs-locally-using-a-container/#ssh_tunnel_to_container_from_client
